@@ -265,6 +265,8 @@ _play() {
         xdo show "$WID" && xdo activate "$WID"
     elif [ "$(uname -o)" == "Android"  ]; then
         am start -n is.xyz.mpv/is.xyz.mpv.MPVActivity -e filepath "${*##* }"
+    elif [ ! -z "$WSL_DISTRO_NAME" ]; then
+        mpv.exe "${*##* }" ${TERMV_MPV_FLAGS} --force-media-title="${*%%  *}"
     else
         # shellcheck disable=SC2086
         mpv "${*##* }" ${TERMV_MPV_FLAGS} --force-media-title="${*%%  *}"
